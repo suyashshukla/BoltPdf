@@ -15,7 +15,7 @@ public class PdfOptions
     /// Gets or sets the Page Size.
     /// available Page Size are A5, A4, A3, Legal, Letter.
     /// </summary>
-    public string PageSize { get; set; }
+    public string? PageSize { get; set; }
 
     /// <summary>
     /// Gets or sets the watermark text.
@@ -23,7 +23,7 @@ public class PdfOptions
     /// <value>
     /// The watermark text.
     /// </value>
-    public string WatermarkText { get; set; }
+    public string? WatermarkText { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this [Horizontal].
@@ -47,7 +47,7 @@ public class PdfOptions
     /// <value>
     /// The Password.
     /// </value>
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
     /// <summary>
     /// Gets or sets the Page Margin.
@@ -55,7 +55,7 @@ public class PdfOptions
     /// <value>
     /// The Page Margin.
     /// </value>
-    public Coordinates PageMargin { get; set; }
+    public Coordinates? PageMargin { get; set; }
 
     /// <summary>
     /// Gets or sets the Page Border.
@@ -63,7 +63,7 @@ public class PdfOptions
     /// <value>
     /// The Page Border.
     /// </value>
-    public Coordinates PageBorder { get; set; }
+    public Coordinates? PageBorder { get; set; }
 
     /// <summary>
     /// Gets or sets the Border Line Width.
@@ -80,22 +80,6 @@ public class PdfOptions
     ///   <c>true</c> if this instance is page number required; otherwise, <c>false</c>.
     /// </value>
     public bool IsPageNumberRequired { get; set; }
-
-    /// <summary>
-    /// Gets or sets the page number location.
-    /// </summary>
-    /// <value>
-    /// The page number location.
-    /// </value>
-    public PageNumberLocation PageNumberLocation { get; set; }
-
-    /// <summary>
-    /// Gets or sets the page number align to.
-    /// </summary>
-    /// <value>
-    /// The page number align to.
-    /// </value>
-    public PageNumberAlignment PageNumberAlignTo { get; set; }
 
     /// <summary>
     /// Gets or sets the module.
@@ -127,7 +111,7 @@ public class PdfOptions
     /// <value>
     /// The callback URL.
     /// </value>
-    public string CallbackUrl { get; set; } = string.Empty;
+    public string? CallbackUrl { get; set; } = string.Empty;
 }
 
 /// <summary>

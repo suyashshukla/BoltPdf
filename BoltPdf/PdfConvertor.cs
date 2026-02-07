@@ -67,7 +67,11 @@ public static class PdfConvertor
             page = await browser.NewPageAsync();
         }
 
-        await page.SetContentAsync(generatePdfFromHtmlRequestDto.HtmlContent);
+        await page.SetContentAsync(generatePdfFromHtmlRequestDto.HtmlContent,
+            new PuppeteerSharp.NavigationOptions
+            {
+                WaitUntil = new[] { WaitUntilNavigation.Networkidle0 }
+            });
         var byteContent = await page.PdfDataAsync();
         pages.Enqueue(page);
 
