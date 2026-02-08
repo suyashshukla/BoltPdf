@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using PuppeteerSharp.Media;
-
 namespace BoltPdf;
 
 /// <summary>
@@ -39,7 +37,7 @@ public static class PdfConvertor
             Headless = true,
             Args =
                 [
-                    "--no-sandbox",             // Bypass OS security model
+                    "--no-sandbox",           // Bypass OS security model
                     "--disable-setuid-sandbox", // Disable the setuid sandbox
                     "--disable-gpu",            // Disable GPU hardware acceleration
                     "--window-size=1920,1080",  // Set window size
@@ -67,32 +65,11 @@ public static class PdfConvertor
         if (!pages.TryDequeue(out var page))
         {
             page = await browser.NewPageAsync();
-            page.SetViewportAsync(new ViewPortOptions
-            {
-                Width = 1200,
-                Height = 1800,
-                DeviceScaleFactor = 2,
-            }).GetAwaiter().GetResult();
+            page.SetViewportAsync(PdfConvertorOptions.DefaultViewPortOptions).GetAwaiter().GetResult();
         }
 
-        await page.SetContentAsync(generatePdfFromHtmlRequestDto.HtmlContent,
-            new NavigationOptions
-            {
-                WaitUntil = new[] { WaitUntilNavigation.Networkidle0 }
-            });
-        var byteContent = await page.PdfDataAsync(new PuppeteerSharp.PdfOptions()
-        {
-            Format = PaperFormat.A4,
-            PrintBackground = true,
-            PreferCSSPageSize = true,
-            MarginOptions = new MarginOptions
-            {
-                Top = "20px",
-                Bottom = "20px",
-                Left = "20px",
-                Right = "20px"
-            }
-        });
+        await page.SetContentAsync(generatePdfFromHtmlRequestDto.HtmlContent);
+        var byteContent = await page.PdfDataAsync(PdfConvertorOptions.DefaultPdfOptions);
         pages.Enqueue(page);
 
         return new GeneratePdfFromHtmlResponseDto
